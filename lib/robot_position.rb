@@ -24,9 +24,9 @@ module Robot
 		end
 
 		# check if command matches place
-	  def place?
-	    @command.downcase.eql? 'place'
-	  end
+		def place?
+			@command.downcase.eql? 'place'
+		end
 
 		# move robot a unit in the direction it faces
 		def move_a_unit
@@ -50,8 +50,8 @@ module Robot
 		end
 
 		def errors?
-	    errors.nil?
-	  end
+			errors.nil?
+		end
 
 		def errors= message
 			@errors = message
