@@ -1,9 +1,12 @@
 module Robot
 	class << self
+		attr_reader :errors
+
 		# position robot
 		def position input, &block
-			@errors = nil
-			split(input)
+			self.errors = nil
+			@command, @position = helper.split(input)
+
 			progress
 		end
 
@@ -12,19 +15,13 @@ module Robot
 				@x, @y, @face = @position.split(',')
 				@face.downcase!
 
-				unless valid_position? && valid_face?
-					@errors = 'Please provide valid position'
+				unless helper.valid?(position: [@x, @y], face: @face)
+					self.errors = 'Please provide valid position/coordinates'
 				end
 			else
-				@errors = 'I only accept PLACE with co-ordinates'
+				self.errors = 'I only accept PLACE with co-ordinates'
 			end
 		end
-
-		# check validity of command and position
-	  def split input
-	    input = input.split
-	    @command, @position = input[0], input[1]
-	  end
 
 		# check if command matches place
 	  def place?
@@ -44,25 +41,8 @@ module Robot
 				@x = @x.to_i - 1
 			end
 
-			@errors = 'Out of bounds' unless valid_position?
+			self.errors = 'Out of bounds' unless helper.position_valid? [@x, @y]
 		end
-
-		# check if face entered is valid
-	  def valid_face?
-	    ['n', 's', 'w', 'e'].include? @face
-	  end
-
-	  # check validity of co-ordinates
-	  def valid_position?
-			begin
-	    	[@x,@y].all? do |coordinate|
-					value = Integer(coordinate)
-					(0..5).include?(value)
-				end
-			rescue ArgumentError
-				@errors = 'Accept integers but saw a string or an unkown format'
-			end
-	  end
 
 		# change robots face
 		def face &block
@@ -70,8 +50,12 @@ module Robot
 		end
 
 		def errors?
-	    @errors.nil?
+	    errors.nil?
 	  end
+
+		def errors= message
+			@errors = message
+		end
 
 		def coordinates
 			"#{@x}, #{@y}, #{@face}"

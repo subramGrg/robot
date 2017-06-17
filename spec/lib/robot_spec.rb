@@ -1,6 +1,7 @@
 require 'spec_helper'
 require 'robot_state'
 require 'robot_position'
+require 'helper'
 
 RSpec.describe Robot do
   describe 'PLACE command' do
@@ -14,8 +15,8 @@ RSpec.describe Robot do
     end
 
     it 'invalid start' do
-      position = 'move 0,z,n'
-      @robot.position = position
+      @robot = Robot::State.new 'place 0,z,e'
+      @robot.position = 'move 0,z,n'
       expect(@robot.valid?).to be_falsy
     end
   end
@@ -36,7 +37,7 @@ RSpec.describe Robot do
 		end
 
     it 'one unit North' do
-			robot = Robot::State.new 'place 1,2,E'
+			robot = Robot::State.new 'place 1, 2, E'
       robot.move
       robot.move
       robot.left
