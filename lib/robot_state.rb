@@ -1,12 +1,12 @@
 module Robot
 	class State
-	  def initialize input
-	    before_position_check input
-	  end
+		def initialize input
+			before_position_check input
+		end
 
 		def position= input
 			before_position_check input
-	  end
+		end
 
 		def before_position_check input
 			@input = input
@@ -40,9 +40,9 @@ module Robot
 		end
 
 		# report with any errors
-	  def valid?
-	    Robot.errors?
-	  end
+		def valid?
+			Robot.errors?
+		end
 
 		# return current position of robot
 		def report

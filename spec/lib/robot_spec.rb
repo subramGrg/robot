@@ -21,62 +21,62 @@ RSpec.describe Robot do
     end
   end
 
-	describe 'MOVE' do
+  describe 'MOVE' do
     before(:example) do
       @robot = Robot::State.new 'place 1,4,n'
     end
 
-		it 'one unit North' do
-			robot = Robot::State.new 'place 0,0,N'
-			robot.move
-			expect(robot.report).to eql('0, 1, n')
+    it 'one unit North' do
+      robot = Robot::State.new 'place 0,0,N'
+      robot.move
+      expect(robot.report).to eql('0, 1, n')
 
       robot.move
       robot.move
-			expect(robot.report).to eql('0, 3, n')
-		end
+      expect(robot.report).to eql('0, 3, n')
+    end
 
     it 'one unit North' do
-			robot = Robot::State.new 'place 1, 2, E'
+      robot = Robot::State.new 'place 1, 2, E'
       robot.move
       robot.move
       robot.left
       robot.move
-			expect(robot.report).to eql('3, 3, n')
-		end
+      expect(robot.report).to eql('3, 3, n')
+    end
 
-		it 'left/right within boundary' do
-			@robot.left
-			@robot.move
-			expect(@robot.valid?).to be_truthy
-			expect(@robot.report).to eql('0, 4, w')
+    it 'left/right within boundary' do
+      @robot.left
+      @robot.move
+      expect(@robot.valid?).to be_truthy
+      expect(@robot.report).to eql('0, 4, w')
 
       robot = Robot::State.new 'place 1,4,n'
       robot.right
-			robot.move
-			expect(robot.valid?).to be_truthy
-			expect(robot.report).to eql('2, 4, e')
-		end
+      robot.move
+      expect(robot.valid?).to be_truthy
+      expect(robot.report).to eql('2, 4, e')
+    end
 
     it 'out of boundary' do
-			robot = Robot::State.new 'place 5,0,e'
-			robot.move
-			expect(robot.valid?).to be_falsy
+      robot = Robot::State.new 'place 5,0,e'
+      robot.move
+      expect(robot.valid?).to be_falsy
 
       robot = Robot::State.new 'place 5,0,e'
       robot.right
-			robot.move
+      robot.move
       expect(robot.report).to eql('5, -1, s')
       expect(robot.valid?).to be_falsy
-		end
-	end
+    end
+  end
 
-	describe 'invalid' do
+  describe 'invalid' do
     it 'first/position command' do
       robot = Robot::State.new 'move 0,0,n'
       expect(robot.valid?).to be_falsy
 
-			robot.position = 'place 10,0,n'
+      robot.position = 'place 10,0,n'
       expect(robot.valid?).to be_falsy
     end
 

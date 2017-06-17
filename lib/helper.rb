@@ -20,7 +20,7 @@ module Robot
     end
 
     # check face is of accepted value
-	  def self.face_valid?
+    def self.face_valid?
 	    ['n', 's', 'w', 'e'].include? @face
 	  end
 
