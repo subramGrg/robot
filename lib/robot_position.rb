@@ -28,7 +28,7 @@ module Robot
 	    @command.downcase.eql? 'place'
 	  end
 
-		# move robot a unit in the direction its facing
+		# move robot a unit in the direction it faces
 		def move_a_unit
 			case @face
 			when 'n' then
