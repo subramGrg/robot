@@ -2,6 +2,7 @@ require 'spec_helper'
 require 'robot_state'
 require 'robot_position'
 require 'helper'
+require 'byebug'
 
 RSpec.describe Robot do
   describe 'PLACE command' do
@@ -62,11 +63,12 @@ RSpec.describe Robot do
       robot = Robot::State.new 'place 5,0,e'
       robot.move
       expect(robot.valid?).to be_falsy
+      expect(robot.report).to eql('5, 0, e')
 
       robot = Robot::State.new 'place 5,0,e'
       robot.right
       robot.move
-      expect(robot.report).to eql('5, -1, s')
+      expect(robot.report).to eql('5, 0, s')
       expect(robot.valid?).to be_falsy
     end
   end

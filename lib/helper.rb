@@ -36,5 +36,16 @@ module Robot
         false
       end
     end
+
+    def self.cache coordinates = nil
+      if coordinates.nil?
+        # return original coordinates
+        [@x, @y]
+      else
+        # set original coordinates if
+        # robot goes out of boundary
+        @x, @y = coordinates
+      end
+    end
   end
 end

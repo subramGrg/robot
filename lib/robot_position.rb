@@ -16,7 +16,9 @@ module Robot
         @face.downcase!
 
         unless helper.valid?(position: [@x, @y], face: @face)
-          self.errors = 'Please provide valid position/coordinates'
+          self.errors = 'Coordinates is out of boundary/Face unaccepted'
+          # place robot in 0,0
+          @x, @y = '0','0'
         end
       else
         self.errors = 'I only accept PLACE with co-ordinates'
@@ -30,6 +32,9 @@ module Robot
 
     # move robot a unit in the direction it faces
     def move_a_unit
+      # cache coordinates if robot moves out of boundary
+      helper.cache [@x, @y]
+
       case @face
       when 'n' then
         @y = @y.to_i + 1
@@ -41,7 +46,10 @@ module Robot
         @x = @x.to_i - 1
       end
 
-      self.errors = 'Out of bounds' unless helper.position_valid? [@x, @y]
+      unless helper.position_valid? [@x, @y]
+        self.errors = 'Out of bounds'
+        @x, @y = helper.cache
+      end
     end
 
     # change robots face

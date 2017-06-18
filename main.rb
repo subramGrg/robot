@@ -1,16 +1,18 @@
-require './lib/robot'
+require './lib/robot_position'
+require './lib/robot_state'
+require './lib/helper'
+
+require 'yaml'
+commands = YAML.load_file("./lib/input.yml")
 
 def main
-	puts "\nToy Robot Simulator\nTo place Robot on tabletop use:\nplace x,y,f\nWarning: Commands apart from place will not work\n\n"
-
 	prompt = gets.chomp
-	robot = Robot.new prompt
+	robot = Robot::State.new prompt
 
 	puts robot.errors; return unless robot.valid?
 
 	command = 'y'
 	while !command.eql? 'n' do
-		puts "\n\nAccepted commands: \n\ni) place x,y,f \nii) MOVE \nii) LEFT \niv) RIGHT \nv) REPORT\nTo move robot use the accepted commands given above:\n\nTo exit (press n):\n"
 		command = gets.chomp
 		command.downcase!
 
@@ -29,5 +31,3 @@ def main
 		end
 	end
 end
-
-main
