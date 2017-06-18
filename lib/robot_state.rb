@@ -4,6 +4,7 @@ module Robot
       before_position_check input
     end
 
+    # set position of robot on 5x5 square tabletop
     def position= input
       before_position_check input
     end
@@ -23,7 +24,7 @@ module Robot
       Robot.move_a_unit
     end
 
-    # rotate robot
+    # rotate robot left
     def left
       nesw = { 'n' => 'w', 's' => 'e', 'w' => 's', 'e' => 'n' }
       Robot.face do |face|
@@ -31,7 +32,7 @@ module Robot
       end
     end
 
-    # rotate robot
+    # rotate robot right
     def right
       nesw = { 'n' => 'e', 's' => 'w', 'w' => 'n', 'e' => 's' }
         Robot.face do |face|
@@ -39,7 +40,8 @@ module Robot
       end
     end
 
-    # report with any errors
+    # check for any errors
+    # it is valid if no error exist
     def valid?
       Robot.errors?
     end

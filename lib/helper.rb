@@ -57,6 +57,7 @@ module Robot
         end
       end
 
+      # validate adequate command is given 
       def valid_input?
         @input.length > 1
       end
