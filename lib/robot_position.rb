@@ -39,13 +39,13 @@ module Robot
       helper.cache [@x, @y]
 
       case @face
-      when 'n' then
+      when 'north' then
         @y = @y.to_i + 1
-      when 's' then
+      when 'south' then
         @y = @y.to_i - 1
-      when 'e' then
+      when 'east' then
         @x = @x.to_i + 1
-      when 'w' then
+      when 'west' then
         @x = @x.to_i - 1
       end
 
@@ -80,7 +80,7 @@ module Robot
 
     def coordinates
       if @x && @y && @face
-        "#{@x}, #{@y}, #{@face}"
+        "#{@x}, #{@y}, #{@face.upcase}"
       else
         "Im not on the board"
       end

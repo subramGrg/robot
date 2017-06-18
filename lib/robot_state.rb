@@ -26,7 +26,7 @@ module Robot
 
     # rotate robot left
     def left
-      nesw = { 'n' => 'w', 's' => 'e', 'w' => 's', 'e' => 'n' }
+      nesw = { 'north' => 'west', 'south' => 'east', 'west' => 'south', 'east' => 'north' }
       Robot.face do |face|
         nesw[face]
       end
@@ -34,7 +34,7 @@ module Robot
 
     # rotate robot right
     def right
-      nesw = { 'n' => 'e', 's' => 'w', 'w' => 'n', 'e' => 's' }
+      nesw = { 'north' => 'east', 'south' => 'west', 'west' => 'north', 'east' => 'south' }
         Robot.face do |face|
         nesw[face]
       end

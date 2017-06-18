@@ -1,15 +1,15 @@
 case_1:
-  - place 0,0,n
+  - place 0,0,north
   - move
   - report
 
 case_2:
-  - place 0,0,n
+  - place 0,0,north
   - left
   - report
 
 case_3:
-  - place 1,2,e
+  - place 1,2,east
   - move
   - move
   - left

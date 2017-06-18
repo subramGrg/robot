@@ -30,7 +30,7 @@ module Robot
 
       # check face is of accepted value
       def face_valid?
-        ['n', 's', 'w', 'e'].include? @face
+        ['north', 'south', 'west', 'east'].include? @face
       end
 
       # check validity of co-ordinates
@@ -57,7 +57,7 @@ module Robot
         end
       end
 
-      # validate adequate command is given 
+      # validate adequate command is given
       def valid_input?
         @input.length > 1
       end
