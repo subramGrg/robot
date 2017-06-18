@@ -1,0 +1,22 @@
+case_1:
+  - place 0,0,n
+  - move
+  - report
+
+case_2:
+  - place 0,0,n
+  - left
+  - report
+
+case_3:
+  - place 1,2,e
+  - move
+  - move
+  - left
+  - move
+  - report
+
+case_4:
+  - place
+  - move
+  - report
