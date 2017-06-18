@@ -20,7 +20,7 @@ You can consult the project's RDoc on [RubyDoc.info](http://www.rubydoc.info/git
 To run this application follow these simple steps:
 
 - Download a copy locally on the computer
-- Run application using `ruby main.rb`
+- Using CLI run application with `ruby main.rb`
 
 ### Additional information
 
