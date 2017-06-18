@@ -1,7 +1,6 @@
 require './lib/robot_position'
 require './lib/robot_state'
 require './lib/helper'
-require 'byebug'
 require 'yaml'
 
 def main
