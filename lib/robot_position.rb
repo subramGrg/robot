@@ -7,7 +7,8 @@ module Robot
       self.errors = nil
       @command, @position = helper.split(input)
 
-      progress
+      # only progress if valid command is entered
+      progress if command_present?
     end
 
     def progress
@@ -32,6 +33,8 @@ module Robot
 
     # move robot a unit in the direction it faces
     def move_a_unit
+      # only progress if valid command is entered
+      return unless command_present?
       # cache coordinates if robot moves out of boundary
       helper.cache [@x, @y]
 
@@ -46,7 +49,7 @@ module Robot
         @x = @x.to_i - 1
       end
 
-      unless helper.position_valid? [@x, @y]
+      unless helper.valid? position: [@x, @y]
         self.errors = 'Out of bounds'
         @x, @y = helper.cache
       end
@@ -61,12 +64,26 @@ module Robot
       errors.nil?
     end
 
+    def command_present?
+      if @command.nil? # true
+        @x, @y, @face = nil, nil, nil
+        self.errors = 'Cannot compute this command'
+        false
+      else
+        true
+      end
+    end
+
     def errors= message
       @errors = message
     end
 
     def coordinates
-      "#{@x}, #{@y}, #{@face}"
+      if @x && @y && @face
+        "#{@x}, #{@y}, #{@face}"
+      else
+        "Im not on the board"
+      end
     end
   end
 end
