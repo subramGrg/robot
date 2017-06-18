@@ -10,14 +10,19 @@ RSpec.describe Robot do
       @robot = Robot::State.new 'place 0,0,e'
     end
 
-    it 'valid start' do
+    it 'starts with valid input' do
       expect(@robot.valid?).to be_truthy
       expect(@robot.report).to eql('0, 0, e')
     end
 
-    it 'invalid start' do
+    it 'starts with invalid input' do
       @robot = Robot::State.new 'place 0,z,e'
       @robot.position = 'move 0,z,n'
+      expect(@robot.valid?).to be_falsy
+    end
+
+    it 'starts with inadequate input' do
+      @robot = Robot::State.new 'place'
       expect(@robot.valid?).to be_falsy
     end
   end
@@ -35,15 +40,6 @@ RSpec.describe Robot do
       robot.move
       robot.move
       expect(robot.report).to eql('0, 3, n')
-    end
-
-    it 'one unit North' do
-      robot = Robot::State.new 'place 1, 2, E'
-      robot.move
-      robot.move
-      robot.left
-      robot.move
-      expect(robot.report).to eql('3, 3, n')
     end
 
     it 'left/right within boundary' do
@@ -85,6 +81,23 @@ RSpec.describe Robot do
     it 'position with valid command' do
       robot = Robot::State.new 'place 3,0,x'
       expect(robot.valid?).to be_falsy
+    end
+  end
+
+  context 'example input and output' do
+    it 'first example' do
+      robot = Robot::State.new 'place 0,0,n'
+      robot.left
+      expect(robot.report).to eql('0, 0, w')
+    end
+
+    it 'second example' do
+      robot = Robot::State.new 'place 1,2,e'
+      robot.move
+      robot.move
+      robot.left
+      robot.move
+      expect(robot.report).to eql('3, 3, n')
     end
   end
 end
